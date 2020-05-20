@@ -1,14 +1,14 @@
 import React  from 'react';
-import { IonTabs, IonRouterOutlet, IonTabBar, IonTabButton, IonIcon, IonLabel, IonBadge } from '@ionic/react';
+import { IonTabs, IonRouterOutlet, IonTabBar, IonTabButton, IonIcon, IonLabel, IonBadge, IonFabButton } from '@ionic/react';
 import { Route, Redirect } from 'react-router';
-import { calendar, location, informationCircle, people, homeOutline, peopleOutline, checkboxOutline, checkmarkDoneOutline } from 'ionicons/icons';
+import { calendar, location, informationCircle, people, homeOutline, peopleOutline, checkboxOutline, checkmarkDoneOutline, notificationsOutline, personCircleOutline } from 'ionicons/icons';
 import SchedulePage from './SchedulePage';
 import SpeakerList from './SpeakerList';
 import SpeakerDetail from './SpeakerDetail';
 import SessionDetail from './SessionDetail';
 import About from './About';
 import RequestFeedback from './RequestFeedback';
-
+import './MainTabs.scss'
 interface MainTabsProps { }
 
 const MainTabs: React.FC<MainTabsProps> = () => {
@@ -26,22 +26,29 @@ const MainTabs: React.FC<MainTabsProps> = () => {
         <Route path="/tabs/speakers/:id" component={SpeakerDetail} exact={true} />
         <Route path="/tabs/schedule/:id" component={SessionDetail} />
         <Route path="/tabs/speakers/sessions/:id" component={SessionDetail} />
-        <Route path="/tabs/about" render={() => <About />} exact={true} />
+        <Route path="/tabs/home" render={() => <About />} exact={true} />
         <Route path="/tabs/requestFeed" render={() => <RequestFeedback />} exact={true} />
       </IonRouterOutlet>
       <IonTabBar slot="bottom">
-        <IonTabButton tab="schedule" href="/tabs/schedule">
+        <IonTabButton className="recievedFeedbackTab" tab="schedule" href="/tabs/schedule">
         <IonBadge color="danger">3</IonBadge>
           <IonIcon icon={peopleOutline} />
-          <IonLabel>Recieved Feedback</IonLabel>
+          <IonLabel className="tabLabel">Recieved</IonLabel>
         </IonTabButton>
-        <IonTabButton tab="about" href="/tabs/about">
-          <IonIcon icon={homeOutline} />
-          <IonLabel>Home</IonLabel>
-        </IonTabButton>
-        <IonTabButton tab="speakers" href="/tabs/speakers">
+        <IonTabButton className="givenFeedbackTab" tab="speakers" href="/tabs/speakers">
           <IonIcon icon={checkmarkDoneOutline} />
-          <IonLabel>Given Feedback</IonLabel>
+          <IonLabel className="tabLabel">Given</IonLabel>
+        </IonTabButton>
+        <IonTabButton className="homeFeedbackTab" tab="about" href="/tabs/home">
+          <IonFabButton className="homeFabTab"><IonIcon icon={homeOutline} /></IonFabButton>
+        </IonTabButton>
+        <IonTabButton className="notificationsFeedbackTab" tab="notifications" href="/tabs/notifications">
+          <IonIcon icon={notificationsOutline} />
+          <IonLabel className="tabLabel">Notifications</IonLabel>
+        </IonTabButton>
+        <IonTabButton className="accountFeedbackTab" tab="account" href="/tabs/account">
+          <IonIcon icon={personCircleOutline} />
+          <IonLabel className="tabLabel">Account</IonLabel>
         </IonTabButton>
       </IonTabBar>
     </IonTabs>

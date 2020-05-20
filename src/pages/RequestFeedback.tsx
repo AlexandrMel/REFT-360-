@@ -34,6 +34,9 @@ import {
   thumbsUpOutline,
   thumbsDownOutline,
   earOutline,
+  chatbubbleEllipsesOutline,
+  sadOutline,
+  happyOutline,
 } from "ionicons/icons";
 import AboutPopover from "../components/AboutPopover";
 
@@ -124,16 +127,12 @@ const RequestFeedback: React.FC<AboutProps> = () => {
                   <IonGrid>
                     <IonRow>
                       <IonCol>
-                        <IonIcon icon={earOutline}></IonIcon>
-                      </IonCol>
-                    </IonRow>
-                    <IonRow>
-                      <IonCol>
-                        <p>Advice</p>
+                        <IonIcon icon={chatbubbleEllipsesOutline}></IonIcon>
                       </IonCol>
                     </IonRow>
                   </IonGrid>
                 </IonButton>
+                <IonLabel className="adviceBtnLabel">Advice</IonLabel>
                 <IonButton
                   className="rating_btn"
                   shape="round"
@@ -141,8 +140,10 @@ const RequestFeedback: React.FC<AboutProps> = () => {
                   color="secondary"
                   fill="outline"
                 >
-                  <IonIcon icon={starHalfOutline}></IonIcon>
+                  <IonIcon className="iconDuble3" icon={sadOutline} />
+                  <IonIcon className="iconDuble4" icon={happyOutline} />
                 </IonButton>
+                <IonLabel className="ratingBtnLabel">Rating</IonLabel>
                 <IonButton
                   className="plus_minus_btn"
                   shape="round"
@@ -150,9 +151,10 @@ const RequestFeedback: React.FC<AboutProps> = () => {
                   color="secondary"
                   fill="outline"
                 >
-                  <IonIcon icon={thumbsUpOutline}></IonIcon>
-                  <IonIcon icon={thumbsDownOutline}></IonIcon>
+                  <IonIcon className="iconDuble" icon={thumbsUpOutline} />
+                  <IonIcon className="iconDuble2" icon={thumbsDownOutline} />
                 </IonButton>
+                <IonLabel className="plus_minusBtnLabel">+ and -</IonLabel>
                 <div>
                   <IonButton
                     className="but"
@@ -160,9 +162,10 @@ const RequestFeedback: React.FC<AboutProps> = () => {
                     color="secondary"
                     expand="block"
                   >
-                    <h5>REQUEST</h5>
+                    <img src="https://img.icons8.com/ios/50/000000/drag-list-down.png" />
                   </IonButton>
                 </div>
+                <IonLabel className="requestBtnLabel">Request</IonLabel>
               </div>
             </IonCol>
           </IonRow>
