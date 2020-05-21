@@ -18,6 +18,7 @@ import {
   IonAvatar,
   IonItemDivider,
   IonFabButton,
+  IonBackButton,
   IonGrid,
   IonRow,
   IonCol,
@@ -95,22 +96,14 @@ const RequestFeedback: React.FC<AboutProps> = () => {
     <IonPage>
       <IonContent>
         <IonHeader>
-          <IonToolbar>
-            <IonButtons slot="start">
-              <IonMenuButton></IonMenuButton>
-              <IonTitle className="ion-text-center center-title">
-                REFT360
+          <IonToolbar className="ion-text-center center-title">
+          <IonButtons slot="start">
+              <IonBackButton defaultHref="/tabs/home" />
+            </IonButtons>
+              <IonTitle>
+                Request Feedback
               </IonTitle>
-            </IonButtons>
-            <IonButtons slot="end">
-              <IonButton onClick={presentPopover}>
-                <IonIcon
-                  slot="icon-only"
-                  ios={ellipsisHorizontal}
-                  md={ellipsisVertical}
-                ></IonIcon>
-              </IonButton>
-            </IonButtons>
+           
           </IonToolbar>
         </IonHeader>
         <IonGrid>
@@ -118,6 +111,7 @@ const RequestFeedback: React.FC<AboutProps> = () => {
             <IonCol>
               <div className="big-circle-pic-req">
                 <IonButton
+                href="/tabs/advice"
                   className="advice_btn"
                   shape="round"
                   expand="block"
@@ -165,7 +159,6 @@ const RequestFeedback: React.FC<AboutProps> = () => {
                     <img src="https://img.icons8.com/ios/50/000000/drag-list-down.png" />
                   </IonButton>
                 </div>
-                <IonLabel className="requestBtnLabel">Request</IonLabel>
               </div>
             </IonCol>
           </IonRow>

@@ -9,6 +9,7 @@ import SessionDetail from './SessionDetail';
 import About from './About';
 import RequestFeedback from './RequestFeedback';
 import './MainTabs.scss'
+import RequestAdvice from './RequestAdvice';
 interface MainTabsProps { }
 
 const MainTabs: React.FC<MainTabsProps> = () => {
@@ -27,6 +28,7 @@ const MainTabs: React.FC<MainTabsProps> = () => {
         <Route path="/tabs/schedule/:id" component={SessionDetail} />
         <Route path="/tabs/speakers/sessions/:id" component={SessionDetail} />
         <Route path="/tabs/home" render={() => <About />} exact={true} />
+        <Route path="/tabs/advice" render={() => <RequestAdvice/>} exact={true} />
         <Route path="/tabs/requestFeed" render={() => <RequestFeedback />} exact={true} />
       </IonRouterOutlet>
       <IonTabBar slot="bottom">

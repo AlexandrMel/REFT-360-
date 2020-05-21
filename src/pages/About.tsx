@@ -81,14 +81,14 @@ const About: React.FC<AboutProps> = () => {
   return (
     <IonPage>
       <IonContent>
-        <IonHeader>
-          <IonToolbar>
+        <IonHeader >
+          <IonToolbar  >
             <IonButtons slot="start">
               <IonMenuButton></IonMenuButton>
-              <IonTitle className="ion-text-center center-title">
-                REFT360
-              </IonTitle>
             </IonButtons>
+              <IonTitle className="ion-text-center">
+                REFT|360
+              </IonTitle>
             <IonButtons slot="end">
               <IonButton onClick={presentPopover}>
                 <IonIcon
@@ -138,7 +138,7 @@ const About: React.FC<AboutProps> = () => {
               >
                <img src="https://img.icons8.com/ios/50/000000/drag-list-up.png"/>
               </IonButton>
-              <IonLabel>Give Feedback</IonLabel>
+              <IonLabel>Give</IonLabel>
             </IonCol>
             <IonCol>
               <IonButton
