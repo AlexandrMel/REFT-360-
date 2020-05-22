@@ -146,7 +146,7 @@ const About: React.FC<AboutProps> = () => {
                 shape="round"
                 color="secondary"
                 expand="block"
-                href="/tabs/requestFeed"
+                href="/tabs/requestFeedback"
               >
                 <img src="https://img.icons8.com/ios/50/000000/drag-list-down.png"/>
               </IonButton>

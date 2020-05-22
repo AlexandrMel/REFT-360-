@@ -28,8 +28,8 @@ const MainTabs: React.FC<MainTabsProps> = () => {
         <Route path="/tabs/schedule/:id" component={SessionDetail} />
         <Route path="/tabs/speakers/sessions/:id" component={SessionDetail} />
         <Route path="/tabs/home" render={() => <About />} exact={true} />
-        <Route path="/tabs/advice" render={() => <RequestAdvice/>} exact={true} />
-        <Route path="/tabs/requestFeed" render={() => <RequestFeedback />} exact={true} />
+        <Route path="/tabs/requestFeedback" render={() => <RequestAdvice/>} exact={true} />
+        {/* <Route path="/tabs/requestFeed" render={() => <RequestFeedback />} exact={true} /> */}
       </IonRouterOutlet>
       <IonTabBar slot="bottom">
         <IonTabButton className="recievedFeedbackTab" tab="schedule" href="/tabs/schedule">

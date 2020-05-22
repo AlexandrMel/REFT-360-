@@ -55,6 +55,7 @@ import {
   removeCircleOutline,
   helpBuoyOutline,
   helpOutline,
+  layersOutline,
 } from "ionicons/icons";
 import AboutPopover from "../components/AboutPopover";
 import "./RequestAdvice.scss";
@@ -78,6 +79,7 @@ const About: React.FC<AboutProps> = () => {
   const [toppings3, setToppings3] = useState([]);
   const [toppings4, setToppings4] = useState([]);
   const [toppings5, setToppings5] = useState([]);
+  const [toppings6, setToppings6] = useState<any>(null);
   console.log(toppings2);
   const addName = () => {
     console.log(searchText);
@@ -441,10 +443,29 @@ const About: React.FC<AboutProps> = () => {
                     auto-grow="true"
                     placeholder="Type in your open-ended question..."
                     color="secondary"
+                    value={toppings6}
+                    onIonChange={(e) => setToppings6(e.detail.value)}
                   ></IonTextarea>
                   <IonIcon icon={removeCircleOutline}></IonIcon>
                 </IonItem>
               )}
+             <IonRow>
+            <IonCol>
+              <IonItemDivider>
+                <IonIcon slot="start" icon={layersOutline}></IonIcon>
+                <IonLabel>
+                  <IonGrid>
+                    <IonRow>
+                      {[...toppings1, ...toppings2, ...toppings3, ...toppings4, ...toppings5, toppings6].map((name: any) => {
+                        return <IonCol>#{name}</IonCol>;
+                      })}
+                    </IonRow>
+                  </IonGrid>
+                </IonLabel>
+              </IonItemDivider>
+            </IonCol>
+          </IonRow>
+                    
             </React.Fragment>
           )}
           <IonButton
