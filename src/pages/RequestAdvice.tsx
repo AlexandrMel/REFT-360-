@@ -11,6 +11,7 @@ import {
   IonDatetime,
   IonSelectOption,
   IonList,
+  IonAlert,
   IonItem,
   IonLabel,
   IonSelect,
@@ -31,7 +32,6 @@ import {
   IonTextarea,
   IonImg,
 } from "@ionic/react";
-import "./About.scss";
 import {
   ellipsisHorizontal,
   ellipsisVertical,
@@ -47,8 +47,17 @@ import {
   bulbOutline,
   chatbubbleOutline,
   barChartOutline,
+  chatbubblesOutline,
+  starHalfOutline,
+  swapVerticalOutline,
+  informationCircleOutline,
+  addCircleOutline,
+  removeCircleOutline,
+  helpBuoyOutline,
+  helpOutline,
 } from "ionicons/icons";
 import AboutPopover from "../components/AboutPopover";
+import "./RequestAdvice.scss";
 
 interface AboutProps {}
 
@@ -56,10 +65,20 @@ const About: React.FC<AboutProps> = () => {
   const [searchText, setSearchText] = useState<any>();
   const [mainTab, setMainTab] = useState<any>("advice");
   const [plusMinusTab, setPlusMinusTab] = useState<any>("+and-");
-  const [adviceText, setAdviceText] = useState<any>("heart");
+  const [checked, setChecked] = useState<any>(false);
+  const [checked1, setChecked1] = useState<any>(false);
+  const [adviceText, setAdviceText] = useState<any>(
+    "Give me your opinion about..."
+  );
   const [toppings, setToppings] = useState<any>("heart");
   const [names, setNames] = useState<[]>([]);
-
+  const [showAlert1, setShowAlert1] = useState(false);
+  const [toppings1, setToppings1] = useState([]);
+  const [toppings2, setToppings2] = useState([]);
+  const [toppings3, setToppings3] = useState([]);
+  const [toppings4, setToppings4] = useState([]);
+  const [toppings5, setToppings5] = useState([]);
+  console.log(toppings2);
   const addName = () => {
     console.log(searchText);
     let newName: any = names;
@@ -116,12 +135,16 @@ const About: React.FC<AboutProps> = () => {
                 color="primary"
               >
                 <IonSegmentButton className="segmentButton" value="advice">
+                  <IonIcon icon={chatbubbleOutline} />
                   <IonLabel>Advice</IonLabel>
                 </IonSegmentButton>
                 <IonSegmentButton className="segmentButton" value="+and-">
+                  <IonIcon icon={swapVerticalOutline} />
                   <IonLabel>+ and -</IonLabel>
                 </IonSegmentButton>
                 <IonSegmentButton className="segmentButton" value="rating">
+                  <IonIcon icon={starHalfOutline} />
+
                   <IonLabel>Rating</IonLabel>
                 </IonSegmentButton>
               </IonSegment>
@@ -132,12 +155,14 @@ const About: React.FC<AboutProps> = () => {
               <IonRow>
                 <IonCol>
                   <IonSegment
+                    mode="ios"
                     onIonChange={(e) => setAdviceText(e.detail!.value!)}
                     scrollable
+                    color="primary"
                     value={adviceText}
                   >
                     <IonSegmentButton value="Give me your opinion about...">
-                      <IonIcon icon={chatbubbleOutline} />
+                      <IonIcon icon={chatbubblesOutline} />
                       <IonLabel>Opinion</IonLabel>
                     </IonSegmentButton>
                     <IonSegmentButton value="Give me an idea on...">
@@ -149,11 +174,12 @@ const About: React.FC<AboutProps> = () => {
                       <IonLabel>Improve</IonLabel>
                     </IonSegmentButton>
                     <IonSegmentButton value="Please give me a suggestion on..">
-                      <IonIcon icon={star} />
+                      <IonIcon icon={helpBuoyOutline} />
                       <IonLabel>Suggest</IonLabel>
                     </IonSegmentButton>
-                    <IonSegmentButton value="call">
-                      <IonIcon icon={call} />
+                    <IonSegmentButton value="other">
+                      <IonIcon icon={helpOutline} />
+                      <IonLabel>Other</IonLabel>
                     </IonSegmentButton>
                     <IonSegmentButton value="globe">
                       <IonIcon icon={globe} />
@@ -166,7 +192,13 @@ const About: React.FC<AboutProps> = () => {
               </IonRow>
               <IonRow>
                 <IonCol>
-                  <IonItemDivider></IonItemDivider>
+                  <IonItemDivider>
+                    <IonIcon
+                      onClick={() => setShowAlert1(true)}
+                      slot="start"
+                      icon={informationCircleOutline}
+                    ></IonIcon>
+                  </IonItemDivider>
                   <IonItem>
                     <IonLabel position="floating">
                       Type in your feedback
@@ -174,63 +206,265 @@ const About: React.FC<AboutProps> = () => {
                     <IonTextarea
                       auto-grow="true"
                       value={adviceText}
+                      color="secondary"
                     ></IonTextarea>
                   </IonItem>
                 </IonCol>
               </IonRow>
-             
             </React.Fragment>
           )}
           {mainTab === "+and-" && (
             <React.Fragment>
-              <IonRow>
-                <IonCol>
-                  <IonSegment
-                    mode="ios"
-                    onIonChange={(e) => setPlusMinusTab(e.detail.value)}
-                    value={plusMinusTab}
-                    color="primary"
-                  >
-                    <IonSegmentButton className="segmentButton" value="+and-">
-                      <IonLabel>+ and -</IonLabel>
-                    </IonSegmentButton>
-                    <IonSegmentButton
-                      className="segmentButton"
-                      value="costumize"
-                    >
-                      <IonLabel>Costumize</IonLabel>
-                    </IonSegmentButton>
-                  </IonSegment>
-                </IonCol>
-              </IonRow>
-            </React.Fragment>
-          )}
-
-          {mainTab === plusMinusTab && (
-            <React.Fragment>
-              <IonItemDivider>Select predefined Questions. </IonItemDivider>
+              <IonItemDivider>
+                <IonIcon
+                  onClick={() => setShowAlert1(true)}
+                  slot="start"
+                  icon={informationCircleOutline}
+                ></IonIcon>
+              </IonItemDivider>
               <IonItem>
-                <IonTitle>What went well?</IonTitle>{" "}
+                <IonLabel>Select Event</IonLabel>
+                <IonSelect value="meeting" interface="action-sheet">
+                  <IonSelectOption value="meeting">Meeting</IonSelectOption>
+                  <IonSelectOption value="presentation">
+                    Presentation
+                  </IonSelectOption>
+                  <IonSelectOption value="training">Training</IonSelectOption>
+                  <IonSelectOption value="workshop">Workshop</IonSelectOption>
+                  <IonSelectOption value="project">Project</IonSelectOption>
+                  <IonSelectOption value="other">Other</IonSelectOption>
+                </IonSelect>
+              </IonItem>
+              <IonItem>
+                <IonInput placeholder="Type in the event name, date"></IonInput>
+              </IonItem>
+              <IonItem>
+                <IonTitle size="small">What went well?</IonTitle>{" "}
                 <IonToggle color="primary" />
               </IonItem>
               <IonItem>
-              <IonTitle>What can be improved?</IonTitle>{" "}
+                <IonTitle size="small">What can be improved?</IonTitle>{" "}
                 <IonToggle color="secondary" />
               </IonItem>
               <IonItem>
-              <IonTitle>What should i avoid?</IonTitle>{" "}
+                <IonTitle size="small">What should i avoid?</IonTitle>{" "}
                 <IonToggle color="danger" />
               </IonItem>
+              <IonItem>
+                <IonTitle size="small">Add open questions!</IonTitle>{" "}
+                <IonToggle
+                  checked={checked}
+                  onIonChange={(e) => setChecked(e.detail.checked)}
+                  color="danger"
+                />
+              </IonItem>
+              {checked === true && (
+                <IonItem className="ion-text-center">
+                  <IonIcon icon={addCircleOutline}></IonIcon>
+                  <IonTextarea
+                    auto-grow="true"
+                    placeholder="Type in your open-ended question..."
+                    color="secondary"
+                  ></IonTextarea>
+                  <IonIcon icon={removeCircleOutline}></IonIcon>
+                </IonItem>
+              )}
             </React.Fragment>
           )}
-           <IonButton
-                onClick={(e) => setAdviceText("The request was sent!")}
-                expand="block"
-                fill="outline"
-              >
-                SEND
-              </IonButton>
+          {mainTab === "rating" && (
+            <React.Fragment>
+              <IonItemDivider>
+                <IonIcon
+                  onClick={() => setShowAlert1(true)}
+                  slot="start"
+                  icon={informationCircleOutline}
+                ></IonIcon>
+              </IonItemDivider>
+              <IonItem>
+                <IonLabel>Select Event</IonLabel>
+                <IonSelect value="meeting" interface="action-sheet">
+                  <IonSelectOption value="meeting">Meeting</IonSelectOption>
+                  <IonSelectOption value="presentation">
+                    Presentation
+                  </IonSelectOption>
+                  <IonSelectOption value="training">Training</IonSelectOption>
+                  <IonSelectOption value="workshop">Workshop</IonSelectOption>
+                  <IonSelectOption value="project">Project</IonSelectOption>
+                  <IonSelectOption value="other">Other</IonSelectOption>
+                </IonSelect>
+              </IonItem>
+              <IonItem>
+                <IonInput placeholder="Type in the event name, date"></IonInput>
+              </IonItem>
+              <IonItem>
+                <IonLabel>Satisfaction</IonLabel>
+                <IonSelect
+                  value={toppings1}
+                  multiple={true}
+                  cancelText="Nah"
+                  okText="Okay!"
+                  onIonChange={(e) => setToppings1(e.detail.value)}
+                >
+                  <IonSelectOption value="overall satisfaction">
+                    Overall Satisfaction
+                  </IonSelectOption>
+                </IonSelect>
+              </IonItem>
+              <IonItem>
+                <IonLabel>Delivery</IonLabel>
+                <IonSelect
+                  className="rating_option"
+                  value={toppings2}
+                  multiple={true}
+                  cancelText="Nah"
+                  okText="Okay!"
+                  onIonChange={(e) => setToppings2(e.detail.value)}
+                >
+                  <IonSelectOption value="bacon">
+                    <p>Professional and confident</p>
+                  </IonSelectOption>
+                  <IonSelectOption value="olives">
+                    Engaged with audience
+                  </IonSelectOption>
+                  <IonSelectOption value="xcheese">
+                    Clear voice with good pace
+                  </IonSelectOption>
+                  <IonSelectOption value="peppers">
+                    Response to questions
+                  </IonSelectOption>
+                  <IonSelectOption value="mushrooms">
+                    Apropriate length
+                  </IonSelectOption>
+                  <IonSelectOption value="onions">
+                    Clear instructions
+                  </IonSelectOption>
+                  <IonSelectOption value="pepperoni">
+                    Smooth transition between topics
+                  </IonSelectOption>
+                  <IonSelectOption value="pineapple">
+                    Logical flow of ideas
+                  </IonSelectOption>
+                  <IonSelectOption value="sausage">
+                    Complete agenda
+                  </IonSelectOption>
+                </IonSelect>
+              </IonItem>
+              <IonItem>
+                <IonLabel>Content</IonLabel>
+                <IonSelect
+                  value={toppings3}
+                  multiple={true}
+                  cancelText="Nah"
+                  okText="Okay!"
+                  onIonChange={(e) => setToppings3(e.detail.value)}
+                >
+                  <IonSelectOption value="quality of content">
+                    Quality of content
+                  </IonSelectOption>
+                  <IonSelectOption value="clarity of content">
+                    Clarity of content
+                  </IonSelectOption>
+                  <IonSelectOption value="originality of content">
+                    Originality of content
+                  </IonSelectOption>
+                </IonSelect>
+              </IonItem>
+              <IonItem>
+                <IonLabel>Organization</IonLabel>
+                <IonSelect
+                  value={toppings4}
+                  multiple={true}
+                  cancelText="Nah"
+                  okText="Okay!"
+                  onIonChange={(e) => setToppings4(e.detail.value)}
+                >
+                  <IonSelectOption value="coordination">
+                    Coordination
+                  </IonSelectOption>
+                  <IonSelectOption value="preparation">
+                    Preparation
+                  </IonSelectOption>
+                  <IonSelectOption value="time management">
+                    Time management
+                  </IonSelectOption>
+                  <IonSelectOption value="material preparation">
+                    Material preparation
+                  </IonSelectOption>
+                  <IonSelectOption value="organization">
+                    Organization
+                  </IonSelectOption>
+                  <IonSelectOption value="location">Location</IonSelectOption>
+                  <IonSelectOption value="preparation of material">
+                    Preparation of material
+                  </IonSelectOption>
+                  <IonSelectOption value="athmosphere">
+                    Athmosphere
+                  </IonSelectOption>
+                </IonSelect>
+              </IonItem>
+              <IonItem>
+                <IonLabel>After event</IonLabel>
+                <IonSelect
+                  value={toppings5}
+                  multiple={true}
+                  cancelText="Nah"
+                  okText="Okay!"
+                  onIonChange={(e) => setToppings5(e.detail.value)}
+                >
+                  <IonSelectOption value="right number of participants">
+                    Right number of participants
+                  </IonSelectOption>
+                  <IonSelectOption value="meeting minutes">
+                    Meeting minutes
+                  </IonSelectOption>
+                  <IonSelectOption value="right people for decision talking">
+                    Right people for decision talking
+                  </IonSelectOption>
+                  <IonSelectOption value="protocol">Protocol</IonSelectOption>
+                  <IonSelectOption value="post event comunication">
+                    Post event comunication
+                  </IonSelectOption>
+                </IonSelect>
+              </IonItem>
+              <IonItem>
+                <IonTitle size="small">Add open rating questions!</IonTitle>{" "}
+                <IonToggle
+                  checked={checked1}
+                  onIonChange={(e) => setChecked1(e.detail.checked)}
+                  color="danger"
+                />
+              </IonItem>
+              {checked1 === true && (
+                <IonItem className="ion-text-center">
+                  <IonIcon icon={addCircleOutline}></IonIcon>
+                  <IonTextarea
+                    auto-grow="true"
+                    placeholder="Type in your open-ended question..."
+                    color="secondary"
+                  ></IonTextarea>
+                  <IonIcon icon={removeCircleOutline}></IonIcon>
+                </IonItem>
+              )}
+            </React.Fragment>
+          )}
+          <IonButton
+            onClick={(e) => setAdviceText("The request was sent!")}
+            expand="block"
+            fill="outline"
+          >
+            SEND
+          </IonButton>
         </IonGrid>
+        <IonAlert
+          isOpen={showAlert1}
+          onDidDismiss={() => setShowAlert1(false)}
+          header={"Advice"}
+          // subHeader={""}
+          message={
+            "Refers to a personal point of view and is a recommendation offered as a guide to action. Choose one option and complete the request by typing in the text field."
+          }
+          buttons={["OK"]}
+        />
       </IonContent>
     </IonPage>
   );
