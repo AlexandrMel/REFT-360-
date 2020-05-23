@@ -46,7 +46,7 @@ const MainTabs: React.FC<MainTabsProps> = () => {
         </IonTabButton>
         <IonTabButton className="notificationsFeedbackTab" tab="notifications" href="/tabs/notifications">
           <IonIcon icon={notificationsOutline} />
-          <IonLabel className="tabLabel">Notifications</IonLabel>
+          <IonLabel className="tabLabel">Requests</IonLabel>
         </IonTabButton>
         <IonTabButton className="accountFeedbackTab" tab="account" href="/tabs/account">
           <IonIcon icon={personCircleOutline} />

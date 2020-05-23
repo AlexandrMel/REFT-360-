@@ -56,6 +56,10 @@ import {
   helpBuoyOutline,
   helpOutline,
   layersOutline,
+  sendOutline,
+  removeOutline,
+  trashBinOutline,
+  trashOutline,
 } from "ionicons/icons";
 import AboutPopover from "../components/AboutPopover";
 import "./RequestAdvice.scss";
@@ -80,6 +84,14 @@ const About: React.FC<AboutProps> = () => {
   const [toppings4, setToppings4] = useState([]);
   const [toppings5, setToppings5] = useState([]);
   const [toppings6, setToppings6] = useState<any>(null);
+  const [newQuestion, setNewQuestion] = useState<any>("");
+  const [questionArr, setQuestionArr] = useState<any>([]);
+
+
+  const removerOpenQuestion = (index: any) => {
+const newArr = questionArr.filter((el: String, i: number) => i !== index)
+setQuestionArr(newArr)
+  }
   console.log(toppings2);
   const addName = () => {
     console.log(searchText);
@@ -134,17 +146,17 @@ const About: React.FC<AboutProps> = () => {
                 mode="ios"
                 onIonChange={(e) => setMainTab(e.detail.value)}
                 value={mainTab}
-                color="primary"
+                color="danger"
               >
-                <IonSegmentButton className="segmentButton" value="advice">
+                <IonSegmentButton className="advice_Tab" value="advice">
                   <IonIcon icon={chatbubbleOutline} />
                   <IonLabel>Advice</IonLabel>
                 </IonSegmentButton>
-                <IonSegmentButton className="segmentButton" value="+and-">
+                <IonSegmentButton className="plus_Minus_Tab" value="+and-">
                   <IonIcon icon={swapVerticalOutline} />
                   <IonLabel>+ and -</IonLabel>
                 </IonSegmentButton>
-                <IonSegmentButton className="segmentButton" value="rating">
+                <IonSegmentButton className="rating_Tab" value="rating">
                   <IonIcon icon={starHalfOutline} />
 
                   <IonLabel>Rating</IonLabel>
@@ -154,6 +166,13 @@ const About: React.FC<AboutProps> = () => {
           </IonRow>
           {mainTab === "advice" && (
             <React.Fragment>
+              <IonItemDivider>
+                <IonIcon
+                  onClick={() => setShowAlert1(true)}
+                  slot="start"
+                  icon={informationCircleOutline}
+                ></IonIcon>
+              </IonItemDivider>
               <IonRow>
                 <IonCol>
                   <IonSegment
@@ -194,13 +213,6 @@ const About: React.FC<AboutProps> = () => {
               </IonRow>
               <IonRow>
                 <IonCol>
-                  <IonItemDivider>
-                    <IonIcon
-                      onClick={() => setShowAlert1(true)}
-                      slot="start"
-                      icon={informationCircleOutline}
-                    ></IonIcon>
-                  </IonItemDivider>
                   <IonItem>
                     <IonLabel position="floating">
                       Type in your feedback
@@ -261,15 +273,32 @@ const About: React.FC<AboutProps> = () => {
                 />
               </IonItem>
               {checked === true && (
-                <IonItem className="ion-text-center">
-                  <IonIcon icon={addCircleOutline}></IonIcon>
-                  <IonTextarea
-                    auto-grow="true"
-                    placeholder="Type in your open-ended question..."
-                    color="secondary"
-                  ></IonTextarea>
-                  <IonIcon icon={removeCircleOutline}></IonIcon>
-                </IonItem>
+                <React.Fragment>
+                  {questionArr.map((el: String, index: number) => (
+                    <IonItem key={index}>
+                    <IonIcon onClick={e => removerOpenQuestion(index)} icon={trashOutline}></IonIcon>
+                      <IonTitle size="small">{el}</IonTitle>{" "}
+                      <IonToggle checked={true} color="danger" />
+                    </IonItem>
+                  ))}
+                  <IonItem className="ion-text-center">
+                    <IonInput
+                      onIonChange={(e) => setNewQuestion(e.detail.value)}
+                      auto-grow="true"
+                      placeholder="Type in your open-ended question..."
+                      color="dark"
+                      value={newQuestion}
+                    ></IonInput>
+                    <IonIcon
+                      onClick={() => {
+                        setQuestionArr([...questionArr, newQuestion]);
+                        setNewQuestion("");
+                      }}
+                      color="secondary"
+                      icon={sendOutline}
+                    ></IonIcon>
+                  </IonItem>
+                </React.Fragment>
               )}
             </React.Fragment>
           )}
@@ -438,7 +467,6 @@ const About: React.FC<AboutProps> = () => {
               </IonItem>
               {checked1 === true && (
                 <IonItem className="ion-text-center">
-                  <IonIcon icon={addCircleOutline}></IonIcon>
                   <IonTextarea
                     auto-grow="true"
                     placeholder="Type in your open-ended question..."
@@ -446,26 +474,32 @@ const About: React.FC<AboutProps> = () => {
                     value={toppings6}
                     onIonChange={(e) => setToppings6(e.detail.value)}
                   ></IonTextarea>
-                  <IonIcon icon={removeCircleOutline}></IonIcon>
+                  <IonIcon icon={sendOutline}></IonIcon>
                 </IonItem>
               )}
-             <IonRow>
-            <IonCol>
-              <IonItemDivider>
-                <IonIcon slot="start" icon={layersOutline}></IonIcon>
-                <IonLabel>
-                  <IonGrid>
-                    <IonRow>
-                      {[...toppings1, ...toppings2, ...toppings3, ...toppings4, ...toppings5, toppings6].map((name: any) => {
-                        return <IonCol>#{name}</IonCol>;
-                      })}
-                    </IonRow>
-                  </IonGrid>
-                </IonLabel>
-              </IonItemDivider>
-            </IonCol>
-          </IonRow>
-                    
+              <IonRow>
+                <IonCol>
+                  <IonItemDivider>
+                    <IonIcon slot="start" icon={layersOutline}></IonIcon>
+                    <IonLabel>
+                      <IonGrid>
+                        <IonRow>
+                          {[
+                            ...toppings1,
+                            ...toppings2,
+                            ...toppings3,
+                            ...toppings4,
+                            ...toppings5,
+                            toppings6,
+                          ].map((name: any) => {
+                            return <IonCol>#{name}</IonCol>;
+                          })}
+                        </IonRow>
+                      </IonGrid>
+                    </IonLabel>
+                  </IonItemDivider>
+                </IonCol>
+              </IonRow>
             </React.Fragment>
           )}
           <IonButton
