@@ -1,23 +1,36 @@
 .alert-checkbox-label {
-    font-size: 0.8rem!important;
-    color: red;
-    display: flex;
-    flex-wrap: wrap;
-    width: 80%;
-    padding:0 12%!important;
+  font-size: 0.8rem !important;
+  color: red;
+  display: flex;
+  flex-wrap: wrap;
+  width: 80%;
+  padding: 0 12% !important;
 }
 ion-segment-button {
-    height: 4rem;
+  height: 4rem;
+
 }
 
 .segment-button-checked {
-    color: #230cf3;
-//     --indicator-box-shadow: red;
+  color: #230cf3;
+//   border: 2px solid #230cf3;
+}
+:host::before {
+    border: 2px solid red;
 }
 // }
 // // .in-segment-color {
 // //     background-color: blueviolet!important;
 // // }
-// ion-segment {
-// background-color: --ion-color-primary;
-// }
+ion-segment {
+background-color: #e9e3e3;
+}
+.in-segment-color {
+color:grey;
+}
+.segment-button-checked {
+  color: blue;
+}
+.plus_Minus_Tab + .segment-button-checked {
+  color: red;
+}
