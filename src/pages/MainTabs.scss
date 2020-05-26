@@ -4,6 +4,9 @@
   .homeFabTab {
       position: absolute;
   }
+  .homeFabTab {
+    --border-radius: 30%;
+  }
   .tabLabel {
       font-size: 0.6rem;
   }

@@ -95,14 +95,14 @@
 
 }
 .big-circle-pic {
-  border: 30px solid #d7eef8;
+  border: 30px solid #f0f0f0;
   border-radius: 50%;
   height: 250px;
   width: 250px;
   margin: 8px auto;
 }
 .smaller-circle-pic {
-  border: 20px solid #3dc2ff;
+  border: 20px solid #888888;
   border-radius: 50%;
   height: 190px;
   width: 190px;
@@ -134,8 +134,10 @@ height: 100%;
   width: 300px;
 }
 .but {
-  height: 80px;
-  width: 80px;
+  height: 50px;
+  width: 95%;
   margin:  auto;
   margin-bottom: 10px;
+  --border-radius: 5%;
+text-transform: capitalize;
 }

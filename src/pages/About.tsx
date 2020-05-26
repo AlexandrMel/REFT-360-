@@ -24,7 +24,14 @@ import {
   IonTitle,
 } from "@ionic/react";
 import "./About.scss";
-import { ellipsisHorizontal, ellipsisVertical } from "ionicons/icons";
+import {
+  ellipsisHorizontal,
+  ellipsisVertical,
+  logInOutline,
+  logOutOutline,
+  arrowRedoOutline,
+  arrowUndoOutline,
+} from "ionicons/icons";
 import AboutPopover from "../components/AboutPopover";
 
 interface AboutProps {}
@@ -81,14 +88,12 @@ const About: React.FC<AboutProps> = () => {
   return (
     <IonPage>
       <IonContent>
-        <IonHeader >
-          <IonToolbar  >
+        <IonHeader>
+          <IonToolbar>
             <IonButtons slot="start">
               <IonMenuButton></IonMenuButton>
             </IonButtons>
-              <IonTitle className="ion-text-center">
-                REFT|360
-              </IonTitle>
+            <IonTitle className="ion-text-center">REFT|360</IonTitle>
             <IonButtons slot="end">
               <IonButton onClick={presentPopover}>
                 <IonIcon
@@ -130,15 +135,15 @@ const About: React.FC<AboutProps> = () => {
           <IonRow className=" ion-text-center">
             <IonCol>
               <IonButton
-                className="but"
+                className="but give"
                 shape="round"
                 expand="block"
                 color="secondary"
                 fill="outline"
               >
-               <img src="https://img.icons8.com/ios/50/000000/drag-list-up.png"/>
+                <IonIcon slot="end" icon={arrowRedoOutline} />
+                <IonLabel autoCapitalize="sentence"><p>Give</p></IonLabel>
               </IonButton>
-              <IonLabel>Give</IonLabel>
             </IonCol>
             <IonCol>
               <IonButton
@@ -148,9 +153,9 @@ const About: React.FC<AboutProps> = () => {
                 expand="block"
                 href="/tabs/requestFeedback"
               >
-                <img src="https://img.icons8.com/ios/50/000000/drag-list-down.png"/>
+                <IonIcon slot="end" icon={arrowUndoOutline} />
+                <IonLabel>Request</IonLabel>
               </IonButton>
-              <IonLabel>Request</IonLabel>
             </IonCol>
           </IonRow>
         </IonGrid>
