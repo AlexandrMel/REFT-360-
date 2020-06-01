@@ -11,26 +11,26 @@ ion-segment-button {
 
 }
 
-.segment-button-checked {
-  color: #230cf3;
-//   border: 2px solid #230cf3;
-}
+// .segment-button-checked {
+//   color: #230cf3;
+// //   border: 2px solid #230cf3;
+// }
 :host::before {
     border: 2px solid red;
 }
 // }
 // // .in-segment-color {
 // //     background-color: blueviolet!important;
-// // }
+// // }yy
 ion-segment {
-background-color: #e9e3e3;
+background-color: #beebe9
 }
-.in-segment-color {
-color:grey;
-}
+// .in-segment-color {
+// color:grey;
+// }
 .segment-button-checked {
-  color: blue;
+  color: #f70404;
 }
-.plus_Minus_Tab + .segment-button-checked {
-  color: red;
-}
+// .plus_Minus_Tab + .segment-button-checked {
+//   color: red;
+// }
