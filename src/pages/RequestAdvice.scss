@@ -20,17 +20,23 @@ ion-segment-button {
 }
 // }
 // // .in-segment-color {
-// //     background-color: blueviolet!important;
+// //     background-color: blueviolet!important; 
 // // }yy
 ion-segment {
-background-color: #beebe9
+background-color: rgb(238, 231, 231);
 }
 // .in-segment-color {
 // color:grey;
 // }
-.segment-button-checked {
-  color: #f70404;
-}
-// .plus_Minus_Tab + .segment-button-checked {
-//   color: red;
+// .segment-button-checked {
+//   color: #f70404;
 // }
+.advice_Tab.segment-button-checked {
+  color: #cf8f90;
+}
+.plus_Minus_Tab.segment-button-checked {
+  color: #d86029;
+}
+.rating_Tab.segment-button-checked {
+  color: #d69027;
+}

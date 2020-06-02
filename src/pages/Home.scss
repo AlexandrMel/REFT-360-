@@ -94,15 +94,23 @@
   }
 
 }
-.big-circle-pic {
-  border: 30px solid #ffe3ed;
-  border-radius: 50%;
-  height: 250px;
-  width: 250px;
-  margin: 8px auto;
+// .big-circle-pic {
+//   border: 30px solid #ffe3ed;
+//   border-radius: 50%;
+//   height: 250px;
+//   width: 250px;
+//   margin: 8px auto;
+// }
+.Home_Grid {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 500px;
+  padding: 10% 0;
+  // align-items: center;
 }
 .smaller-circle-pic {
-  border: 20px solid #beebe9;
+  // border: 20px solid #beebe9;
   border-radius: 50%;
   height: 190px;
   width: 190px;
@@ -133,11 +141,24 @@ height: 100%;
 .center-title {
   width: 300px;
 }
-.but {
+.button_give, .button_request {
   height: 50px;
   width: 95%;
   margin:  auto;
   margin-bottom: 10px;
   --border-radius: 5%;
 text-transform: capitalize;
+ion-label {
+  color: black;
+  font-size: 0.9rem;
+}
+}
+
+.button_give {
+  border: 2px solid #014596;
+
+}
+.button_request {
+  border: 2px solid #c51f3e;
+
 }

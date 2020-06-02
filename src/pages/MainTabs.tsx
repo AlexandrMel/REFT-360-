@@ -6,10 +6,11 @@ import SchedulePage from './SchedulePage';
 import SpeakerList from './SpeakerList';
 import SpeakerDetail from './SpeakerDetail';
 import SessionDetail from './SessionDetail';
-import About from './About';
 import RequestFeedback from './RequestFeedback';
 import './MainTabs.scss'
 import RequestAdvice from './RequestAdvice';
+import Home from './Home';
+import GivePage from './GivePage';
 interface MainTabsProps { }
 
 const MainTabs: React.FC<MainTabsProps> = () => {
@@ -27,8 +28,9 @@ const MainTabs: React.FC<MainTabsProps> = () => {
         <Route path="/tabs/speakers/:id" component={SpeakerDetail} exact={true} />
         <Route path="/tabs/schedule/:id" component={SessionDetail} />
         <Route path="/tabs/speakers/sessions/:id" component={SessionDetail} />
-        <Route path="/tabs/home" render={() => <About />} exact={true} />
+        <Route path="/tabs/home" render={() => <Home />} exact={true} />
         <Route path="/tabs/requestFeedback" render={() => <RequestAdvice/>} exact={true} />
+        <Route path="/tabs/giveFeedback" render={() => <GivePage />} exact={true} />
         {/* <Route path="/tabs/requestFeed" render={() => <RequestFeedback />} exact={true} /> */}
       </IonRouterOutlet>
       <IonTabBar slot="bottom">

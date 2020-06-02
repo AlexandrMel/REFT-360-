@@ -23,7 +23,7 @@ import {
   IonCol,
   IonTitle,
 } from "@ionic/react";
-import "./About.scss";
+import "./Home.scss";
 import {
   ellipsisHorizontal,
   ellipsisVertical,
@@ -105,7 +105,7 @@ const About: React.FC<AboutProps> = () => {
             </IonButtons>
           </IonToolbar>
         </IonHeader>
-        <IonGrid>
+        <IonGrid className="Home_Grid">
           <IonRow>
             <IonCol>
               <div className="big-circle-pic">
@@ -115,6 +115,7 @@ const About: React.FC<AboutProps> = () => {
               </div>
             </IonCol>
           </IonRow>
+          <IonGrid>
           <IonRow>
             <IonCol className="ion-text-center">
               <h1 className="profile-name">Rebecca Miller</h1>
@@ -125,6 +126,7 @@ const About: React.FC<AboutProps> = () => {
               <p className="profile-position">CEO</p>
             </IonCol>
           </IonRow>
+          </IonGrid>
           <IonRow>
             <IonCol>
               <div className="profile-divider">
@@ -135,11 +137,12 @@ const About: React.FC<AboutProps> = () => {
           <IonRow className=" ion-text-center">
             <IonCol>
               <IonButton
-                className="but give"
+                className="button_give"
                 shape="round"
                 expand="block"
                 color="secondary"
                 fill="outline"
+                href="/tabs/giveFeedback"
               >
                 <IonIcon slot="end" icon={arrowRedoOutline} />
                 <IonLabel autoCapitalize="sentence"><p>Give</p></IonLabel>
@@ -147,8 +150,9 @@ const About: React.FC<AboutProps> = () => {
             </IonCol>
             <IonCol>
               <IonButton
-                className="but"
+                className="button_request"
                 shape="round"
+                fill="outline"
                 color="secondary"
                 expand="block"
                 href="/tabs/requestFeedback"
