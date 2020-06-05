@@ -8,12 +8,18 @@
 }
 ion-segment {
   height: 5rem;
-  background-color: #e7e4e5;}
-.Advice_Segment ion-segment {
+  background-color: #e7e4e5;
+}
+.Templates_Segment ion-segment {
   height: 4rem;
   background-color:#f8ede5;
+  ion-label {
+    font-size: 0.7rem;
+  }
 }
-
+.center-title {
+  margin-left: 48px;
+}
 .infoIconContainer {
   height: 35px;
 

@@ -3,7 +3,7 @@ import { IonTabs, IonRouterOutlet, IonTabBar, IonTabButton, IonIcon, IonLabel, I
 import { Route, Redirect } from 'react-router';
 import { calendar, location, informationCircle, people, homeOutline, peopleOutline, checkboxOutline, checkmarkDoneOutline, notificationsOutline, personCircleOutline } from 'ionicons/icons';
 import SchedulePage from './SchedulePage';
-import SpeakerList from './SpeakerList';
+import SpeakerList from './GivenFeedback';
 import SpeakerDetail from './SpeakerDetail';
 import SessionDetail from './SessionDetail';
 import RequestFeedback from './RequestFeedback';
@@ -11,9 +11,11 @@ import './MainTabs.scss'
 import RequestAdvice from './RequestAdvice';
 import Home from './Home';
 import GivePage from './GivePage';
+import GivenFeedback from './GivenFeedback';
 interface MainTabsProps { }
 
 const MainTabs: React.FC<MainTabsProps> = () => {
+  const feedbacks:[] = [];
 
   return (
     <IonTabs>
@@ -24,7 +26,7 @@ const MainTabs: React.FC<MainTabsProps> = () => {
           Use the component prop when your component depends on the RouterComponentProps passed in automatically.
         */}
         <Route path="/tabs/schedule" render={() => <SchedulePage />} exact={true} />
-        <Route path="/tabs/speakers" render={() => <SpeakerList />} exact={true} />
+        <Route path="/tabs/givenFeedback" render={() => <GivenFeedback />} exact={true} />
         <Route path="/tabs/speakers/:id" component={SpeakerDetail} exact={true} />
         <Route path="/tabs/schedule/:id" component={SessionDetail} />
         <Route path="/tabs/speakers/sessions/:id" component={SessionDetail} />
@@ -39,7 +41,7 @@ const MainTabs: React.FC<MainTabsProps> = () => {
           <IonIcon icon={peopleOutline} />
           <IonLabel className="tabLabel">Recieved</IonLabel>
         </IonTabButton>
-        <IonTabButton className="givenFeedbackTab" tab="speakers" href="/tabs/speakers">
+        <IonTabButton className="givenFeedbackTab" tab="speakers" href="/tabs/givenFeedback">
           <IonIcon icon={checkmarkDoneOutline} />
           <IonLabel className="tabLabel">Given</IonLabel>
         </IonTabButton>

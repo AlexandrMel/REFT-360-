@@ -20,6 +20,7 @@ import {
   IonItemDivider,
   IonFabButton,
   IonToggle,
+  IonToast,
   IonBackButton,
   IonGrid,
   IonRow,
@@ -31,7 +32,6 @@ import {
   IonInput,
   IonTextarea,
   IonImg,
-  IonText,
 } from "@ionic/react";
 import {
   ellipsisHorizontal,
@@ -61,15 +61,23 @@ import {
   removeOutline,
   trashBinOutline,
   trashOutline,
+  bulb,
+  cogOutline,
+  colorPaletteOutline,
+  ribbonOutline,
+  trendingUpOutline,
+  thunderstormOutline,
+  trailSignOutline,
+  starOutline,
 } from "ionicons/icons";
 import AboutPopover from "../components/AboutPopover";
-import "./RequestAdvice.scss";
+import "./GivePage.scss";
 
 interface AboutProps {}
 
 const About: React.FC<AboutProps> = () => {
   const [searchText, setSearchText] = useState<any>();
-  const [mainTab, setMainTab] = useState<any>("advice");
+  const [mainTab, setMainTab] = useState<any>("open_feedback");
   const [plusMinusTab, setPlusMinusTab] = useState<any>("+and-");
   const [checked, setChecked] = useState<any>(false);
   const [checked1, setChecked1] = useState<any>(false);
@@ -87,6 +95,7 @@ const About: React.FC<AboutProps> = () => {
   const [toppings6, setToppings6] = useState<any>(null);
   const [newQuestion, setNewQuestion] = useState<any>("");
   const [questionArr, setQuestionArr] = useState<any>([]);
+  const [showToast1, setShowToast1] = useState(false);
 
   const removerOpenQuestion = (index: any) => {
     const newArr = questionArr.filter((el: String, i: number) => i !== index);
@@ -103,24 +112,63 @@ const About: React.FC<AboutProps> = () => {
   return (
     <IonPage>
       <IonContent>
-        <IonHeader>
-          <IonToolbar className="ion-text-center center-title">
+        <IonHeader >
+          <IonToolbar className="ion-text-center">
             <IonButtons slot="start">
               <IonBackButton defaultHref="/tabs/home" />
             </IonButtons>
-            <IonTitle>Give</IonTitle>
+            <IonTitle>Give Feedback</IonTitle>
           </IonToolbar>
         </IonHeader>
         <IonGrid>
           <IonRow>
+            <IonCol size="5">
+              <IonSelect placeholder="Select Event" interface="action-sheet">
+                <IonSelectOption value="meeting">Meeting</IonSelectOption>
+                <IonSelectOption value="presentation">
+                  Presentation
+                </IonSelectOption>
+                <IonSelectOption value="training">Training</IonSelectOption>
+                <IonSelectOption value="workshop">Workshop</IonSelectOption>
+                <IonSelectOption value="project">Project</IonSelectOption>
+                <IonSelectOption value="other">Other</IonSelectOption>
+              </IonSelect>
+            </IonCol>
+            <IonCol size="7">
+              <IonInput
+                className="ion-text-center"
+                mode="ios"
+                type="date"
+              ></IonInput>
+            </IonCol>
+          </IonRow>
+          <IonRow>
+            <IonCol>
+              <IonItem>
+                <IonGrid>
+                  <IonRow>
+                    <IonCol>
+                      <IonInput
+                        color="dark"
+                        placeholder="Type in the event name"
+                      ></IonInput>
+                    </IonCol>
+                  </IonRow>
+                </IonGrid>
+              </IonItem>
+            </IonCol>
+          </IonRow>
+
+          <IonRow>
             <IonCol>
               <IonSearchbar
                 autocomplete="on"
+                color="primary"
                 value={searchText}
                 onIonChange={(e) => setSearchText(e.detail.value!)}
                 onBlur={addName}
                 showCancelButton="focus"
-                placeholder="Search teammate by name"
+                placeholder="Search and add teammate by name"
               ></IonSearchbar>
             </IonCol>
           </IonRow>
@@ -141,26 +189,6 @@ const About: React.FC<AboutProps> = () => {
             </IonCol>
           </IonRow>
           <IonRow>
-            <IonCol size="5">
-              <IonSelect value="meeting" interface="action-sheet">
-                <IonSelectOption value="meeting">Meeting</IonSelectOption>
-                <IonSelectOption value="presentation">
-                  Presentation
-                </IonSelectOption>
-                <IonSelectOption value="training">Training</IonSelectOption>
-                <IonSelectOption value="workshop">Workshop</IonSelectOption>
-                <IonSelectOption value="project">Project</IonSelectOption>
-                <IonSelectOption value="other">Other</IonSelectOption>
-              </IonSelect>
-            </IonCol>
-            <IonCol>
-              <IonItem>
-                <IonInput placeholder="Type in the event name, date"></IonInput>
-              </IonItem>
-            </IonCol>
-          </IonRow>
-
-          <IonRow>
             <IonCol>
               <IonSegment
                 mode="ios"
@@ -168,44 +196,28 @@ const About: React.FC<AboutProps> = () => {
                 value={mainTab}
                 color="danger"
               >
-                <IonSegmentButton className="advice_Tab" value="advice">
+                <IonSegmentButton className="advice_Tab" value="open_feedback">
                   <IonIcon icon={chatbubbleOutline} />
-                  <IonLabel>Advice</IonLabel>
+                  <IonLabel>Open Feedback</IonLabel>
                 </IonSegmentButton>
-                <IonSegmentButton className="praise_Tab" value="praise">
+                <IonSegmentButton className="plus_Minus_Tab" value="templates">
                   <IonIcon icon={swapVerticalOutline} />
-                  <IonLabel>Praise</IonLabel>
-                </IonSegmentButton>
-                <IonSegmentButton className="encourage_Tab" value="encourage">
-                  <IonIcon icon={starHalfOutline} />
-
-                  <IonLabel>Encourage</IonLabel>
+                  <IonLabel>Templates</IonLabel>
                 </IonSegmentButton>
               </IonSegment>
             </IonCol>
           </IonRow>
-          {mainTab === "advice" && (
+          {mainTab === "templates" && (
             <React.Fragment>
+              <IonItem className="infoIconContainer">
+                <IonIcon
+                  onClick={() => setShowAlert1(true)}
+                  slot="end"
+                  icon={informationCircleOutline}
+                ></IonIcon>
+              </IonItem>
               <IonRow>
-                <IonCol>
-                  <IonItemDivider>
-                    <IonItem>
-                      <IonIcon
-                        onClick={() => setShowAlert1(true)}
-                        slot="start"
-                        icon={informationCircleOutline}
-                      ></IonIcon>
-                      <IonText>
-                        Refers to a personal point of view and is a
-                        recommendation offered as a guide to action.
-                      </IonText>
-                    </IonItem>
-                  </IonItemDivider>
-                </IonCol>
-              </IonRow>
-
-              <IonRow>
-                <IonCol>
+                <IonCol className="Templates_Segment">
                   <IonSegment
                     mode="ios"
                     onIonChange={(e) => setAdviceText(e.detail!.value!)}
@@ -213,17 +225,45 @@ const About: React.FC<AboutProps> = () => {
                     color="primary"
                     value={adviceText}
                   >
+                    <IonSegmentButton value="Great Idea! Let’s move forward with...">
+                      <IonIcon icon={bulbOutline} />
+                      <IonLabel>Idea</IonLabel>
+                    </IonSegmentButton>
+                    <IonSegmentButton value="Thank you for your support on...">
+                      <IonIcon icon={cogOutline} />
+                      <IonLabel>Support</IonLabel>
+                    </IonSegmentButton>
+                    <IonSegmentButton value="Thanks, you have made a valuable contribution on...">
+                      <IonIcon icon={colorPaletteOutline} />
+                      <IonLabel>Contribution</IonLabel>
+                    </IonSegmentButton>
+                    <IonSegmentButton value="Well done. Be proud of it. You have done a great job...">
+                      <IonIcon icon={ribbonOutline} />
+                      <IonLabel>Achievement</IonLabel>
+                    </IonSegmentButton>
+                    <IonSegmentButton value="I see the effort you have done so far, you have made good progress with...">
+                      <IonIcon icon={trendingUpOutline} />
+                      <IonLabel>Progress</IonLabel>
+                    </IonSegmentButton>
+                    <IonSegmentButton value="Yes, it is not like you’ve expected. But I am confident you’ll do things differently next time. Go ahead and you’ll succeed...">
+                      <IonIcon icon={thunderstormOutline} />
+                      <IonLabel>Mistake</IonLabel>
+                    </IonSegmentButton>
+                    <IonSegmentButton value="Sometimes you can't see the light at the end of the tunnel. Focus on solutions, I am sure you'll find one...">
+                      <IonIcon icon={trailSignOutline} />
+                      <IonLabel>Challenge</IonLabel>
+                    </IonSegmentButton>
+                    <IonSegmentButton value="I’m impressed, you have really a natural strength in...">
+                      <IonIcon icon={starOutline} />
+                      <IonLabel>Impressed</IonLabel>
+                    </IonSegmentButton>
                     <IonSegmentButton value="I would like to share with you my thoughts on...">
                       <IonIcon icon={chatbubblesOutline} />
                       <IonLabel>Opinion</IonLabel>
                     </IonSegmentButton>
-                    <IonSegmentButton value="I would like to share with you an idea about...">
-                      <IonIcon icon={bulbOutline} />
-                      <IonLabel>Idea</IonLabel>
-                    </IonSegmentButton>
                     <IonSegmentButton value="I would recommend you to...">
-                      <IonIcon icon={barChartOutline} />
-                      <IonLabel>Improve</IonLabel>
+                      <IonIcon icon={chatbubbleOutline} />
+                      <IonLabel mode="ios">Improvement</IonLabel>
                     </IonSegmentButton>
                   </IonSegment>
                 </IonCol>
@@ -232,7 +272,7 @@ const About: React.FC<AboutProps> = () => {
                 <IonCol>
                   <IonItem>
                     <IonLabel position="floating">
-                      Type in your feedback
+                      Complete the sentence
                     </IonLabel>
                     <IonTextarea
                       auto-grow="true"
@@ -244,136 +284,37 @@ const About: React.FC<AboutProps> = () => {
               </IonRow>
             </React.Fragment>
           )}
-          {mainTab === "praise" && (
+          {mainTab === "open_feedback" && (
             <React.Fragment>
-              <IonRow>
-                <IonCol>
-                  <IonItemDivider>
-                    <IonItem>
-                      <IonIcon
-                        onClick={() => setShowAlert1(true)}
-                        slot="start"
-                        icon={informationCircleOutline}
-                      ></IonIcon>
-                      <IonText>
-                        values the „performance, end-result, or a person
-                      </IonText>
-                    </IonItem>
-                  </IonItemDivider>
-                </IonCol>
-              </IonRow>
-
-              <IonRow>
-                <IonCol>
-                  <IonSegment
-                    mode="ios"
-                    onIonChange={(e) => setAdviceText(e.detail!.value!)}
-                    scrollable
-                    color="primary"
-                    value={adviceText}
-                  >
-                    <IonSegmentButton value="Great Idea! Let's move forward with...">
-                      <IonIcon icon={chatbubblesOutline} />
-                      <IonLabel>Idea</IonLabel>
-                    </IonSegmentButton>
-                    <IonSegmentButton value="Thank you for your support on ...">
-                      <IonIcon icon={bulbOutline} />
-                      <IonLabel>Support</IonLabel>
-                    </IonSegmentButton>
-                    <IonSegmentButton value="Thanks, you have made a valuable contribution on...">
-                      <IonIcon icon={barChartOutline} />
-                      <IonLabel>Contribution</IonLabel>
-                    </IonSegmentButton>
-                    <IonSegmentButton value="Well done. Be proud of it. You have done a great job...">
-                      <IonIcon icon={barChartOutline} />
-                      <IonLabel>Achievement</IonLabel>
-                    </IonSegmentButton>
-                  </IonSegment>
-                </IonCol>
-              </IonRow>
-
-              <IonRow>
-                <IonCol>
-                  <IonItem>
-                    <IonLabel position="floating">
-                      Type in your feedback
-                    </IonLabel>
-                    <IonTextarea
-                      auto-grow="true"
-                      value={adviceText}
-                      color="secondary"
-                    ></IonTextarea>
-                  </IonItem>
-                </IonCol>
-              </IonRow>
+              <IonItem className="infoIconContainer">
+                <IonIcon
+                  onClick={() => setShowAlert1(true)}
+                  slot="end"
+                  icon={informationCircleOutline}
+                ></IonIcon>
+              </IonItem>
+              <IonItem>
+                <IonLabel color="medium" position="floating">Type in your open-ended feedback...</IonLabel>
+                <IonInput
+                  onIonChange={(e) => setNewQuestion(e.detail.value)}
+                  auto-grow="true"
+                  color="dark"
+                  value={newQuestion}
+                ></IonInput>
+              </IonItem>
             </React.Fragment>
           )}
-          {mainTab === "encourage" && (
-           <React.Fragment>
-           <IonRow>
-             <IonCol>
-               <IonItemDivider>
-                 <IonItem>
-                   <IonIcon
-                     onClick={() => setShowAlert1(true)}
-                     slot="start"
-                     icon={informationCircleOutline}
-                   ></IonIcon>
-                   <IonText>
-                   values the effort done so far and helps to foster self-confidence, encourages action, focus on strenghts, competences and positive
-                   </IonText>
-                 </IonItem>
-               </IonItemDivider>
-             </IonCol>
-           </IonRow>
-
-           <IonRow>
-             <IonCol>
-               <IonSegment
-                 mode="ios"
-                 onIonChange={(e) => setAdviceText(e.detail!.value!)}
-                 scrollable
-                 color="primary"
-                 value={adviceText}
-               >
-                 <IonSegmentButton value="I see the effort you have done so far, you have made good progress with…">
-                   <IonIcon icon={chatbubblesOutline} />
-                   <IonLabel>Progress</IonLabel>
-                 </IonSegmentButton>
-                 <IonSegmentButton value="Yes, it is not like you’ve expected. But I am confident you’ll do things differently next time. Go ahead and you’ll succeed…..">
-                   <IonIcon icon={bulbOutline} />
-                   <IonLabel>Failure</IonLabel>
-                 </IonSegmentButton>
-                 <IonSegmentButton value="Sometimes you can't see the light at the end of the tunnel. Focus on solutions, I am sure you'll find one…">
-                   <IonIcon icon={barChartOutline} />
-                   <IonLabel>Challenge</IonLabel>
-                 </IonSegmentButton>
-                 <IonSegmentButton value="I’m impressed, you have really a natural strength in…">
-                   <IonIcon icon={barChartOutline} />
-                   <IonLabel>Impressed</IonLabel>
-                 </IonSegmentButton>
-               </IonSegment>
-             </IonCol>
-           </IonRow>
-
-           <IonRow>
-             <IonCol>
-               <IonItem>
-                 <IonLabel position="floating">
-                   Type in your feedback
-                 </IonLabel>
-                 <IonTextarea
-                   auto-grow="true"
-                   value={adviceText}
-                   color="secondary"
-                 ></IonTextarea>
-               </IonItem>
-             </IonCol>
-           </IonRow>
-         </React.Fragment>
-          )}
+      {/* <IonButton onClick={() => setShowToast1(true)} expand="block">Show Toast 1</IonButton> */}
+      <IonToast
+        isOpen={showToast1}
+        onDidDismiss={() => setShowToast1(false)}
+        message="Your feedback has been sent!"
+        duration={1000}
+        translucent={true}
+      />
           <IonButton
-            onClick={(e) => setAdviceText("The request was sent!")}
+            onClick={() => setShowToast1(true)}
+            // onClick={(e) => setAdviceText("The request was sent!")}
             expand="block"
             fill="outline"
           >

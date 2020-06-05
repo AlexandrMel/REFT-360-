@@ -140,7 +140,7 @@ const About: React.FC<AboutProps> = () => {
                 className="button_give"
                 shape="round"
                 expand="block"
-                color="secondary"
+                color="primary"
                 fill="outline"
                 href="/tabs/giveFeedback"
               >
@@ -152,8 +152,8 @@ const About: React.FC<AboutProps> = () => {
               <IonButton
                 className="button_request"
                 shape="round"
-                fill="outline"
-                color="secondary"
+                fill="solid"
+                color="primary"
                 expand="block"
                 href="/tabs/requestFeedback"
               >

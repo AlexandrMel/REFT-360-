@@ -31,6 +31,7 @@ import {
   IonInput,
   IonTextarea,
   IonImg,
+  IonToast,
 } from "@ionic/react";
 import {
   ellipsisHorizontal,
@@ -86,12 +87,13 @@ const About: React.FC<AboutProps> = () => {
   const [toppings6, setToppings6] = useState<any>(null);
   const [newQuestion, setNewQuestion] = useState<any>("");
   const [questionArr, setQuestionArr] = useState<any>([]);
+  const [showToast1, setShowToast1] = useState(false);
 
 
   const removerOpenQuestion = (index: any) => {
-const newArr = questionArr.filter((el: String, i: number) => i !== index)
-setQuestionArr(newArr)
-  }
+    const newArr = questionArr.filter((el: String, i: number) => i !== index);
+    setQuestionArr(newArr);
+  };
   console.log(toppings2);
   const addName = () => {
     console.log(searchText);
@@ -108,19 +110,59 @@ setQuestionArr(newArr)
             <IonButtons slot="start">
               <IonBackButton defaultHref="/tabs/home" />
             </IonButtons>
-            <IonTitle>Request</IonTitle>
+            <IonTitle>Request Feedback</IonTitle>
           </IonToolbar>
         </IonHeader>
         <IonGrid>
           <IonRow>
+            <IonCol size="5">
+              <IonSelect placeholder="Select Event" interface="action-sheet">
+                <IonSelectOption value="meeting">Meeting</IonSelectOption>
+                <IonSelectOption value="presentation">
+                  Presentation
+                </IonSelectOption>
+                <IonSelectOption value="training">Training</IonSelectOption>
+                <IonSelectOption value="workshop">Workshop</IonSelectOption>
+                <IonSelectOption value="project">Project</IonSelectOption>
+                <IonSelectOption value="other">Other</IonSelectOption>
+              </IonSelect>
+            </IonCol>
+            <IonCol size="7">
+              <IonInput
+                className="ion-text-center"
+                mode="ios"
+                type="date"
+              ></IonInput>
+            </IonCol>
+          </IonRow>
+          <IonRow>
+            <IonCol>
+              <IonItem>
+                <IonGrid>
+                  <IonRow>
+                    <IonCol>
+                      <IonInput
+                        color="dark"
+                        
+                        placeholder="Type in the event name"
+                      ></IonInput>
+                    </IonCol>
+                  </IonRow>
+                </IonGrid>
+              </IonItem>
+            </IonCol>
+          </IonRow>
+
+          <IonRow>
             <IonCol>
               <IonSearchbar
                 autocomplete="on"
+                color="primary"
                 value={searchText}
                 onIonChange={(e) => setSearchText(e.detail.value!)}
                 onBlur={addName}
                 showCancelButton="focus"
-                placeholder="Search teammate by name"
+                placeholder="Search and add teammate by name"
               ></IonSearchbar>
             </IonCol>
           </IonRow>
@@ -166,15 +208,15 @@ setQuestionArr(newArr)
           </IonRow>
           {mainTab === "advice" && (
             <React.Fragment>
-              <IonItemDivider>
+              <IonItem className="infoIconContainer">
                 <IonIcon
                   onClick={() => setShowAlert1(true)}
-                  slot="start"
+                  slot="end"
                   icon={informationCircleOutline}
                 ></IonIcon>
-              </IonItemDivider>
+              </IonItem>
               <IonRow>
-                <IonCol>
+                <IonCol className="Advice_Segment">
                   <IonSegment
                     mode="ios"
                     onIonChange={(e) => setAdviceText(e.detail!.value!)}
@@ -198,16 +240,6 @@ setQuestionArr(newArr)
                       <IonIcon icon={helpBuoyOutline} />
                       <IonLabel>Suggest</IonLabel>
                     </IonSegmentButton>
-                    <IonSegmentButton value="other">
-                      <IonIcon icon={helpOutline} />
-                      <IonLabel>Other</IonLabel>
-                    </IonSegmentButton>
-                    <IonSegmentButton value="globe">
-                      <IonIcon icon={globe} />
-                    </IonSegmentButton>
-                    <IonSegmentButton value="basket">
-                      <IonIcon icon={basket} />
-                    </IonSegmentButton>
                   </IonSegment>
                 </IonCol>
               </IonRow>
@@ -229,29 +261,14 @@ setQuestionArr(newArr)
           )}
           {mainTab === "+and-" && (
             <React.Fragment>
-              <IonItemDivider>
+              <IonItem className="infoIconContainer">
                 <IonIcon
                   onClick={() => setShowAlert1(true)}
-                  slot="start"
+                  slot="end"
                   icon={informationCircleOutline}
                 ></IonIcon>
-              </IonItemDivider>
-              <IonItem>
-                <IonLabel>Select Event</IonLabel>
-                <IonSelect value="meeting" interface="action-sheet">
-                  <IonSelectOption value="meeting">Meeting</IonSelectOption>
-                  <IonSelectOption value="presentation">
-                    Presentation
-                  </IonSelectOption>
-                  <IonSelectOption value="training">Training</IonSelectOption>
-                  <IonSelectOption value="workshop">Workshop</IonSelectOption>
-                  <IonSelectOption value="project">Project</IonSelectOption>
-                  <IonSelectOption value="other">Other</IonSelectOption>
-                </IonSelect>
               </IonItem>
-              <IonItem>
-                <IonInput placeholder="Type in the event name, date"></IonInput>
-              </IonItem>
+
               <IonItem>
                 <IonTitle size="small">What went well?</IonTitle>{" "}
                 <IonToggle color="primary" />
@@ -276,7 +293,10 @@ setQuestionArr(newArr)
                 <React.Fragment>
                   {questionArr.map((el: String, index: number) => (
                     <IonItem key={index}>
-                    <IonIcon onClick={e => removerOpenQuestion(index)} icon={trashOutline}></IonIcon>
+                      <IonIcon
+                        onClick={(e) => removerOpenQuestion(index)}
+                        icon={trashOutline}
+                      ></IonIcon>
                       <IonTitle size="small">{el}</IonTitle>{" "}
                       <IonToggle checked={true} color="danger" />
                     </IonItem>
@@ -304,28 +324,12 @@ setQuestionArr(newArr)
           )}
           {mainTab === "rating" && (
             <React.Fragment>
-              <IonItemDivider>
+              <IonItem className="infoIconContainer">
                 <IonIcon
                   onClick={() => setShowAlert1(true)}
-                  slot="start"
+                  slot="end"
                   icon={informationCircleOutline}
                 ></IonIcon>
-              </IonItemDivider>
-              <IonItem>
-                <IonLabel>Select Event</IonLabel>
-                <IonSelect value="meeting" interface="action-sheet">
-                  <IonSelectOption value="meeting">Meeting</IonSelectOption>
-                  <IonSelectOption value="presentation">
-                    Presentation
-                  </IonSelectOption>
-                  <IonSelectOption value="training">Training</IonSelectOption>
-                  <IonSelectOption value="workshop">Workshop</IonSelectOption>
-                  <IonSelectOption value="project">Project</IonSelectOption>
-                  <IonSelectOption value="other">Other</IonSelectOption>
-                </IonSelect>
-              </IonItem>
-              <IonItem>
-                <IonInput placeholder="Type in the event name, date"></IonInput>
               </IonItem>
               <IonItem>
                 <IonLabel>Satisfaction</IonLabel>
@@ -502,9 +506,17 @@ setQuestionArr(newArr)
               </IonRow>
             </React.Fragment>
           )}
+             <IonToast
+        isOpen={showToast1}
+        onDidDismiss={() => setShowToast1(false)}
+        message="Your feedback request has been sent!"
+        duration={1000}
+        translucent={true}
+      />
           <IonButton
-            onClick={(e) => setAdviceText("The request was sent!")}
+            // onClick={(e) => setAdviceText("The request was sent!")}
             expand="block"
+            onClick={() => setShowToast1(true)}
             fill="outline"
           >
             SEND
